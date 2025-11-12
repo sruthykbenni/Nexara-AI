@@ -1,0 +1,28 @@
+[project]
+name = "smart-apllier"
+version = "0.1.0"
+description = "LangGraph-based AI Job Agent (Smart Applier)"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+   "streamlit",
+   "beautifulsoup4",
+   "requests",
+   "sentence-transformers",
+   "faiss-cpu",
+   "pandas",
+   "python-docx",
+   "jinja2",
+   "langgraph",
+   "pydantic",
+   "pdfplumber",
+   "python-dotenv>=1.1.1",
+   "openai>=2.6.1",
+   "groq>=0.33.0",
+   "jinja2",
+   "weasyprint",
+   "reportlab>=4.4.4",
+   "nltk>=3.9.2",
+   "langchain",
+   "google-generativeai"
+]

@@ -1,0 +1,54 @@
+# ================================
+# 🔒 Smart Applier AI - .gitignore
+# ================================
+
+# --- 🔐 Secrets ---
+.env
+*.env
+secrets.json
+.streamlit/secrets.toml
+
+# --- 🧠 Local Database & Data ---
+data/
+data/smart_applier.db
+data/*.pdf
+data/resumes/
+data/jobs/
+data/profiles/
+!data/.keep  # optional placeholder to keep empty folder
+
+# --- 🧩 Python Caches ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+*.log
+
+# --- 🧱 Virtual Environments ---
+.venv/
+env/
+venv/
+
+# --- ⚙️ Build & Dependency Files ---
+*.egg-info/
+dist/
+build/
+
+# --- 🖥️ IDE / OS Files ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- 🧮 Streamlit Files ---
+.streamlit/cache/
+.streamlit/logs/
+
+# --- 🧰 Jupyter (if any future notebooks) ---
+.ipynb_checkpoints/
+
+# --- 📦 Misc ---
+*.bak
+*.swp
+*.tmp
