@@ -3,6 +3,21 @@ import streamlit as st
 from smart_applier.utils.path_utils import ensure_database_exists
 from smart_applier.database.db_setup import create_tables
 
+# src/app.py
+import os
+from pathlib import Path
+from smart_applier.database.db_setup import initialize_database
+from smart_applier.utils.path_utils import get_data_dirs
+
+# ✅ Ensure database exists on first run (Cloud-safe)
+paths = get_data_dirs()
+db_path = paths["root"] / "smart_applier.db"
+if not db_path.exists():
+    os.makedirs(paths["root"], exist_ok=True)
+    print("🧩 Creating database...")
+    initialize_database()
+
+
 # 🧩 Import all UI page modules
 from ui import (
     page_1_create_profile,
