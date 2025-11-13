@@ -186,7 +186,7 @@ import json
 import sqlite3
 from typing import List, Dict, Any, Optional
 from smart_applier.utils.path_utils import get_data_dirs
-from smart_applier.database.db_setup import create_tables
+from smart_applier.database.db_setup import initialize_database
 
 
 # -------------------------
@@ -200,10 +200,10 @@ def get_connection():
     # If using Streamlit in-memory mode, rebuild schema every session
     if paths.get("use_in_memory_db", False):
         conn = sqlite3.connect(":memory:")
-        create_tables(conn)
+        initialize_database(conn)
     else:
         if not os.path.exists(db_path):
-            create_tables()
+            initialize_database()
         conn = sqlite3.connect(db_path)
     return conn
 

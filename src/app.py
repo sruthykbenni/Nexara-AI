@@ -1,12 +1,9 @@
-# app.py
 import streamlit as st
-from smart_applier.utils.path_utils import ensure_database_exists
-from smart_applier.database.db_setup import create_tables
-
-# src/app.py
 import os
 from pathlib import Path
-from smart_applier.database.db_setup import initialize_database
+
+# 🧩 Database setup
+from smart_applier.database.db_setup import initialize_database, load_sample_data
 from smart_applier.utils.path_utils import get_data_dirs
 
 # ✅ Ensure database exists on first run (Cloud-safe)
@@ -16,7 +13,7 @@ if not db_path.exists():
     os.makedirs(paths["root"], exist_ok=True)
     print("🧩 Creating database...")
     initialize_database()
-
+    load_sample_data()  # optional demo data for first-time users
 
 # 🧩 Import all UI page modules
 from ui import (
@@ -25,7 +22,7 @@ from ui import (
     page_3_external_jd,
     page_4_job_scraper,
     page_5_skill_gap_analyzer,
-    page_6_db_viewer,  # ✅ Admin/debug viewer
+    page_6_db_viewer,
 )
 
 # -------------------------
@@ -39,26 +36,12 @@ st.set_page_config(
 )
 
 # -------------------------
-# 🧱 Initialize Database
-# -------------------------
-@st.cache_resource
-def initialize_database():
-    """Ensure data folders and SQLite DB are ready."""
-    ensure_database_exists()
-    create_tables()
-    return True
-
-initialize_database()
-
-# -------------------------
-# 🌱 Session Initialization
+# 🌱 Initialize Session State
 # -------------------------
 if "profile_data" not in st.session_state:
     st.session_state["profile_data"] = None
-
 if "job_data" not in st.session_state:
     st.session_state["job_data"] = None
-
 if "matched_jobs" not in st.session_state:
     st.session_state["matched_jobs"] = None
 

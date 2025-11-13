@@ -76,7 +76,7 @@ def ensure_database_exists():
     db_path = dirs["db_path"]
     # Import inside function to avoid circular imports during module import time.
     try:
-        from smart_applier.database.db_setup import create_tables
+        from smart_applier.database.db_setup import initialize_database
     except Exception as e:
         # If the import fails, surface a friendly message so you can debug
         raise RuntimeError(
@@ -89,4 +89,4 @@ def ensure_database_exists():
         # ensure parent exists (should, but be safe)
         db_path.parent.mkdir(parents=True, exist_ok=True)
         print(f"🛠️ Creating SQLite DB at: {db_path}")
-    create_tables()  # create_tables should handle connection to the correct path (see db_setup)
+    initialize_database()  # create_tables should handle connection to the correct path (see db_setup)
