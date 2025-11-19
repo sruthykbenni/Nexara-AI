@@ -62,7 +62,7 @@ def run():
                     for r in resources:
                         st.write(f"- {r}")
 
-            st.toast(" Skill gap analysis complete!", icon="")
+            st.toast(" Skill gap analysis complete!")
 
         except Exception as e:
             st.error(f" Analysis failed: {e}")
