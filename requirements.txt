@@ -9,3 +9,4 @@ sentence-transformers
 google-generativeai
 faiss-cpu
 streamlit[pdf]
+plotly
