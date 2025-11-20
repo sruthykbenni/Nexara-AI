@@ -179,4 +179,4 @@ def run():
             st.success(f"Profile saved successfully for `{new_user_id}`")
 
         except Exception as e:
-            st.error(f"❌ Failed to save profile: {e}")
+            st.error(f" Failed to save profile: {e}")

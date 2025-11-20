@@ -37,7 +37,7 @@ class ResumeBuilderAgent:
                 genai.configure(api_key=api_key)
                 self.model = genai.GenerativeModel("models/gemini-2.0-flash-lite")
             except Exception as e:
-                print(f"⚠️ Gemini init failed: {e}")
+                print(f" Gemini init failed: {e}")
 
     # -----------------------------------------------------
     # SAFE TEXT CONVERTER (Fix for dict → Paragraph crash)
@@ -74,7 +74,7 @@ class ResumeBuilderAgent:
             summary = re.sub(r"\b(I|my|me|our|we|us)\b", "", summary, flags=re.I)
             return summary.strip()
         except Exception as e:
-            print(f"⚠️ Gemini summary generation failed: {e}")
+            print(f" Gemini summary generation failed: {e}")
             return None
 
     # -----------------------------------------------------

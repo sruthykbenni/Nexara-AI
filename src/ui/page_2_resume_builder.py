@@ -45,7 +45,7 @@ def run():
                 st.success("Resume generated successfully!")
 
                 # -------------------------
-                # 🔽 Download Button
+                # Download Button
                 # -------------------------
                 st.download_button(
                     label="Download Resume PDF",
@@ -55,7 +55,7 @@ def run():
                 )
 
                 # -------------------------
-                # 👁️ Inline Preview
+                #  Inline Preview
                 # -------------------------
                 try:
                     base64_pdf = base64.b64encode(pdf_bytes).decode("utf-8")
@@ -65,13 +65,13 @@ def run():
                             width="100%" height="700px">
                         </iframe>
                     """
-                    st.markdown("### 📄 Resume Preview")
+                    st.markdown("###  Resume Preview")
                     st.markdown(pdf_display, unsafe_allow_html=True)
                 except Exception as e:
                     st.warning(f"Could not preview PDF inline: {e}")
 
                 # -------------------------
-                # 💾 Save to Database
+                #  Save to Database
                 # -------------------------
                 try:
                     insert_resume(
@@ -85,4 +85,4 @@ def run():
                     st.error(f"Could not save resume to database: {e}")
 
         except Exception as e:
-            st.error(f"❌ Error generating resume: {e}")
+            st.error(f"Error generating resume: {e}")

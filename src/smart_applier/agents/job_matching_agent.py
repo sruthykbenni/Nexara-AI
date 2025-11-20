@@ -99,7 +99,7 @@ class JobMatchingAgent:
     ):
 
         if job_embeddings.shape[0] == 0:
-            raise ValueError("❌ No job embeddings available.")
+            raise ValueError(" No job embeddings available.")
 
         # FIX — ensure float32 everywhere
         profile_vector = profile_vector.astype("float32")
@@ -122,8 +122,8 @@ class JobMatchingAgent:
                     score = float(D[0][rank])
                     insert_top_matched(job_id=db_id, user_id=user_id, score=score)
                 except Exception as e:
-                    print("⚠️ Failed to save top match:", e)
+                    print(" Failed to save top match:", e)
         else:
-            print("⚠️ WARNING: db_id column missing in jobs_df. Top matches not saved.")
+            print(" WARNING: db_id column missing in jobs_df. Top matches not saved.")
 
         return matched

@@ -31,7 +31,7 @@ def run():
     selected_user_id = profiles_meta[labels.index(selected_label)]["user_id"]
 
     # ----------------------------------------------------------
-    # 1️⃣ RUN ENTIRE PIPELINE (NO SECOND BUTTON NEEDED)
+    #  RUN ENTIRE PIPELINE (NO SECOND BUTTON NEEDED)
     # ----------------------------------------------------------
     if st.button("Start Full Job Analysis + Tailored Resume"):
         try:
@@ -91,7 +91,7 @@ def run():
             if pdf_bytes:
                 st.subheader(" Tailored Resume Generated")
 
-                # 1️⃣ Download
+                #  Download
                 st.download_button(
                     label="Download Tailored Resume",
                     data=pdf_bytes,
@@ -99,7 +99,7 @@ def run():
                     mime="application/pdf"
                 )
 
-                # 2️⃣ Preview
+                # Preview
                 try:
                     b64_pdf = base64.b64encode(pdf_bytes).decode("utf-8")
                     st.markdown(
@@ -112,7 +112,7 @@ def run():
                 except:
                     st.warning("PDF preview failed.")
 
-                # 3️⃣ Save to DB
+                # Save to DB
                 try:
                     insert_resume(
                         user_id=selected_user_id,
@@ -125,7 +125,7 @@ def run():
                     st.error(f"Failed to save resume: {e}")
 
             else:
-                st.error("❌ Tailored resume bytes missing from workflow output.")
+                st.error("Tailored resume bytes missing from workflow output.")
 
         except Exception as e:
             st.error(f"Pipeline failed: {e}")

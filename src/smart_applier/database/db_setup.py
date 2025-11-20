@@ -87,4 +87,4 @@ def initialize_database(conn: sqlite3.Connection = None):
 
     if created_here:
         conn.close()
-    print(f"✅ Database initialized at: {get_db_path()}")
+    print(f"Database initialized at: {get_db_path()}")

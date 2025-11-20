@@ -15,7 +15,7 @@ class ResumeTailorAgent:
         load_dotenv()
         api_key = os.getenv("GEMINI_API_KEY")
         if not api_key:
-            raise ValueError("❌ GEMINI_API_KEY not found in environment.")
+            raise ValueError(" GEMINI_API_KEY not found in environment.")
         genai.configure(api_key=api_key)
 
         self.gemini_model = genai.GenerativeModel("models/gemini-2.0-flash-lite")
@@ -32,7 +32,7 @@ class ResumeTailorAgent:
             response = self.gemini_model.generate_content(prompt)
             return response.text.strip()
         except Exception as e:
-            print(f"⚠️ Gemini JD cleaning failed: {e}")
+            print(f" Gemini JD cleaning failed: {e}")
             return job_description
 
     def compare_skills(self, jd_keywords, user_skills, threshold=0.45):
@@ -53,7 +53,14 @@ class ResumeTailorAgent:
     def refine_with_gemini(self, profile, jd_keywords, matched_skills, coverage_score):
         prompt = f"""
         You are a professional resume optimizer.
-        Refine user's full profile clearly and return only clean JSON.
+        Refine the user's full profile clearly and return only clean JSON.
+
+        IMPORTANT RULES:
+        - Do NOT add any new skills, tools, technologies, certificates, or job experiences that are not already in the user's profile.
+        - Do NOT invent numbers, metrics, percentages, or achievements.
+        - You may ONLY rewrite, restructure, clarify, and highlight existing information.
+        - Preserve all factual content exactly as provided.
+        - You may reorder items and improve wording, but do not fabricate anything new.
 
         USER PROFILE:
         {json.dumps(profile, indent=2)}
@@ -77,7 +84,7 @@ class ResumeTailorAgent:
             return profile
 
         except Exception as e:
-            print(f"⚠️ Gemini refinement failed: {e}")
+            print(f" Gemini refinement failed: {e}")
             return profile
 
     def tailor_profile(self, profile: dict, top_job=None, user_id: str = ""):
@@ -154,7 +161,7 @@ class ResumeTailorAgent:
                 pdf_blob=pdf_bytes
             )
         except Exception as e:
-            print(f"⚠️ Could not save tailored resume to DB: {e}")
+            print(f" Could not save tailored resume to DB: {e}")
 
         # --------------------------------
         # 6. RETURN PDF BYTES

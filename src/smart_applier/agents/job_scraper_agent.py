@@ -17,12 +17,12 @@ class JobScraperAgent:
 
         for page in range(1, pages + 1):
             url = self.base_url.format(page=page)
-            print(f"🟢 Scraping page {page}: {url}")
+            print(f" Scraping page {page}: {url}")
 
             try:
                 response = requests.get(url, headers=self.headers, timeout=10)
                 if response.status_code != 200:
-                    print(f"⚠️ Failed to fetch page {page}: {response.status_code}")
+                    print(f"Failed to fetch page {page}: {response.status_code}")
                     continue
 
                 soup = BeautifulSoup(response.content, "html.parser")
@@ -54,17 +54,17 @@ class JobScraperAgent:
                             "scraped_at": datetime.now().isoformat()
                         })
                     except Exception as e:
-                        print(f"⚠️ Error parsing job block: {e}")
+                        print(f" Error parsing job block: {e}")
                         continue
 
                 time.sleep(1)
 
             except Exception as e:
-                print(f"❌ Error fetching page {page}: {e}")
+                print(f" Error fetching page {page}: {e}")
                 continue
 
         df_jobs = pd.DataFrame(jobs_list)
-        print(f"🟢 Scraper Agent: fetched {len(df_jobs)} jobs total")
+        print(f" Scraper Agent: fetched {len(df_jobs)} jobs total")
 
         if df_jobs.empty:
             return df_jobs
@@ -72,6 +72,6 @@ class JobScraperAgent:
         # Save to DB and get actual DB IDs
         inserted_ids = bulk_insert_scraped_jobs(jobs_list)
         df_jobs["db_id"] = inserted_ids
-        print(f"🟢 Assigned DB IDs to scraped jobs ({len(inserted_ids)} rows)")
+        print(f" Assigned DB IDs to scraped jobs ({len(inserted_ids)} rows)")
 
         return df_jobs

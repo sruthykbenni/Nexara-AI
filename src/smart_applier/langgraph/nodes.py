@@ -49,7 +49,7 @@ def match_jobs_node(state):
     job_vecs = np.array(state["job_embeddings"], dtype="float32")
 
     if profile_vec.size == 0 or job_vecs.size == 0:
-        raise ValueError("❌ Empty embeddings received — cannot match jobs.")
+        raise ValueError(" Empty embeddings received — cannot match jobs.")
 
     matched_df = matcher.match_jobs(
         profile_vec,

@@ -27,20 +27,20 @@ class SkillGapAgent:
                 genai.configure(api_key=self.api_key)
                 self.model_name = "gemini-2.0-flash-lite"
             except Exception as e:
-                print(f"⚠️ Gemini setup failed: {e}")
+                print(f" Gemini setup failed: {e}")
                 self.use_gemini = False
         else:
-            print("⚠️ GEMINI_API_KEY not found — skipping Gemini suggestions.")
+            print(" GEMINI_API_KEY not found — skipping Gemini suggestions.")
 
         # -------------------------
         # Load profile & jobs
         # -------------------------
         if not profile or not isinstance(profile, dict):
-            raise ValueError("❌ Invalid or missing profile.")
+            raise ValueError(" Invalid or missing profile.")
         self.profile = profile
 
         if jobs_df is None or jobs_df.empty:
-            raise ValueError("❌ No job data provided to SkillGapAgent.")
+            raise ValueError(" No job data provided to SkillGapAgent.")
         self.jobs_df = jobs_df
 
         # -------------------------
@@ -52,14 +52,14 @@ class SkillGapAgent:
             for s in skills if s.strip()
         ]
         if not self.user_skills:
-            raise ValueError("⚠️ Profile contains no valid skills.")
+            raise ValueError(" Profile contains no valid skills.")
 
-        print(f"🧠 Loaded user skills: {len(self.user_skills)} items")
+        print(f" Loaded user skills: {len(self.user_skills)} items")
 
         # -------------------------
         # Initialize semantic model
         # -------------------------
-        print("🧩 Loading 'paraphrase-mpnet-base-v2' for semantic analysis...")
+        print("Loading 'paraphrase-mpnet-base-v2' for semantic analysis...")
         self.model = SentenceTransformer("paraphrase-mpnet-base-v2")
         self.user_embeddings = self.model.encode(self.user_skills, convert_to_tensor=True)
 
@@ -84,7 +84,7 @@ class SkillGapAgent:
         all_missing_skills = defaultdict(list)
         valid_columns = [col for col in self.jobs_df.columns if "skill" in col.lower()]
         if not valid_columns:
-            raise ValueError("❌ No skill-related column found in job data.")
+            raise ValueError(" No skill-related column found in job data.")
         skill_col = valid_columns[0]
 
         for _, job in self.jobs_df.iterrows():
@@ -140,7 +140,7 @@ class SkillGapAgent:
                 if line.strip()
             ][:n_resources]
         except Exception as e:
-            print(f"⚠️ Gemini resource fetch failed for '{skill}': {e}")
+            print(f" Gemini resource fetch failed for '{skill}': {e}")
             return []
 
     def get_recommendations(self, top_n=5):
