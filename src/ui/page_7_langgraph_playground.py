@@ -79,11 +79,10 @@ def run():
 
             st.success("Workflow completed!")
 
-            # Display raw JSON
-            st.subheader("Final Output State")
-            st.json(result)
+            # -----------------------------------------------
+            # SMART OUTPUT (NO RAW JSON ANYMORE)
+            # -----------------------------------------------
 
-            # Additional smart displays
             if result.get("scraped_jobs"):
                 st.subheader("Scraped Jobs")
                 st.dataframe(pd.DataFrame(result["scraped_jobs"]).head(10))
