@@ -31,7 +31,7 @@ from ui import (
     page_4_job_scraper,
     page_5_skill_gap_analyzer,
     page_6_dashboard,
-    page_7_langgraph_playground       # ✅ Needed import
+    page_7_langgraph_playground       #  Needed import
 )
 
 # ------------------------------------------------------------
@@ -39,7 +39,6 @@ from ui import (
 # ------------------------------------------------------------
 st.set_page_config(
     page_title="Nexara AI",
-    page_icon="✨",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -77,7 +76,7 @@ sections = [
     "External JD Flow",
     "Job Scraper Flow",
     "Skill Gap Analyzer",
-    "Langgraph Playground"      # ✅ Fixed spelling
+    "Langgraph Playground"      #  Fixed spelling
 ]
 
 selected = st.sidebar.radio(
