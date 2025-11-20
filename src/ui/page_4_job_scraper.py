@@ -48,7 +48,7 @@ def run():
             scraped = result.get("scraped_jobs")
             if scraped:
                 scraped_df = pd.DataFrame(scraped)
-                st.subheader("📌 Scraped Jobs")
+                st.subheader(" Scraped Jobs")
                 st.dataframe(scraped_df.head(10))
             else:
                 st.warning("No scraped jobs returned.")
@@ -59,7 +59,7 @@ def run():
             matched = result.get("matched_jobs")
             if matched:
                 matched_df = pd.DataFrame(matched)
-                st.subheader("🎯 Top Matched Jobs")
+                st.subheader("Top Matched Jobs")
                 st.dataframe(matched_df.head(10))
 
                 # Save for session use
@@ -72,7 +72,7 @@ def run():
             # ---------------------------------------
             recs = result.get("skill_gap_recommendations")
             if recs:
-                st.subheader("🚧 Skill Gap Recommendations")
+                st.subheader(" Skill Gap Recommendations")
                 for skill, links in recs.items():
                     st.markdown(f"**{skill.title()}**")
                     for r in links:
@@ -89,7 +89,7 @@ def run():
             )
 
             if pdf_bytes:
-                st.subheader("📄 Tailored Resume Generated")
+                st.subheader(" Tailored Resume Generated")
 
                 # 1️⃣ Download
                 st.download_button(
