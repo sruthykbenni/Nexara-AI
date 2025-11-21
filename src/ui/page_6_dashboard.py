@@ -76,14 +76,12 @@ def run():
 
     if resumes:
 
-        # Categorize resumes cleanly
         basic_resumes = [r for r in resumes if r["resume_type"] == "generated"]
         tailored_matched = [r for r in resumes if r["resume_type"] == "tailored_matched_job"]
         tailored_external = [r for r in resumes if r["resume_type"] == "tailored"]
 
         colA, colB, colC = st.columns(3)
 
-        # Reusable block for resume download links
         def render_resume_links(resume_list):
             if not resume_list:
                 return "None"
@@ -203,3 +201,48 @@ def run():
         if st.button("Scrape Jobs"):
             st.session_state["page"] = "Job Scraper Flow"
             st.rerun()
+
+    st.divider()
+
+    # ======================================================
+    # DATABASE CLEANUP (DEVELOPER TOOLS)
+    # ======================================================
+    st.subheader("🧹 Database Cleanup (Developer Tools)")
+    st.caption("Warning: These actions cannot be undone.")
+
+    import sqlite3
+    from smart_applier.utils.path_utils import get_data_dirs
+
+    paths = get_data_dirs()
+    db_path = paths["db_path"]
+
+    def clear_table(table_name):
+        try:
+            conn = sqlite3.connect(db_path)
+            conn.execute(f"DELETE FROM {table_name}")
+            conn.commit()
+            conn.close()
+            st.success(f"Cleared table: {table_name}")
+        except Exception as e:
+            st.error(f"Error clearing {table_name}: {e}")
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        if st.button("Clear Profiles Table"):
+            clear_table("profiles")
+
+        if st.button("Clear Resumes Table"):
+            clear_table("resumes")
+
+    with col2:
+        if st.button("Clear Scraped Jobs Table"):
+            clear_table("scraped_jobs")
+
+        if st.button("Clear Matched Jobs Table"):
+            clear_table("top_matched_jobs")
+
+    with col3:
+        if st.button("Clear EVERYTHING"):
+            for tbl in ["profiles", "resumes", "scraped_jobs", "top_matched_jobs"]:
+                clear_table(tbl)
